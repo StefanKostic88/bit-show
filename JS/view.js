@@ -148,17 +148,24 @@ const viewModule = (function () {
       <ul>
        ${eoisodesData
          .map((el) => {
-           return `<li>Season ${el.season}, epizode ${el.epizodeNum} - ${el.name}</li>`;
+           return `<li>S${this.doubleDigits(el.season)}.E${this.doubleDigits(
+             el.epizodeNum
+           )} - ${el.name}</li>`;
          })
          .join("")}
       </ul>
       </div>`;
     }
+    doubleDigits(num) {
+      return num.toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+    }
   }
 
   class PaginationView {
     constructor() {
-      // document.querySelector(".pagination");
       this.parentEl = $(".pagination");
     }
     clearParentElement() {
