@@ -28,11 +28,11 @@ const modelModule = (function () {
     constructor(name, img, description, seasons, cast, crew, aka, episodes) {
       this.name = name;
       this.img = img;
-      this.description = description; //data.summary,
+      this.description = description;
       this.seasons = seasons;
       this.cast = cast;
       this.crew = crew;
-      this.aka = aka; //aka || "Unavailable",
+      this.aka = aka;
       this.episodes = episodes;
     }
   }
@@ -98,7 +98,7 @@ const modelModule = (function () {
       console.log(err.message);
     }
   };
-
+  //Movie Info
   const showMovienfo = async function (id) {
     const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
     const seasonsRes = await fetch(

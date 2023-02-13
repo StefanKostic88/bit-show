@@ -9,10 +9,26 @@
     showMovienfo,
   } = model;
 
+  const controlCloseMovieInfo = async function (e) {
+    if (!e.target.closest("#movie-container")) {
+      let curPage = [...(await getInitialData(state.currentPage.curPage))];
+      PaginationView.showPagination();
+      MovieCardView.render(curPage);
+      PaginationView.render(state.currentPage);
+    } else {
+      if (!e.target.closest(".card")) return;
+      state.movieInfo = await showMovienfo(+e.target.closest(".card").id);
+      MovieInfoView.render(state.movieInfo);
+      PaginationView.hidePagination();
+    }
+  };
+
   const controlMovieInfo = async function () {
-    console.log(+this.id);
     state.movieInfo = await showMovienfo(+this.id);
     MovieInfoView.render(state.movieInfo);
+    PaginationView.hidePagination();
+    console.log("click");
+    $("body").on("click", controlCloseMovieInfo);
   };
 
   const initLandingPage = async function () {
@@ -35,7 +51,6 @@
     if (!isFinite(+e.target.dataset.page)) return;
     if (+e.target.dataset.page === state.currentPage.curPage) return;
     state.currentPage = { ...changePage(+e.target.dataset.page) };
-    console.log(state.currentPage.curPage);
     let curPage = [...(await getInitialData(state.currentPage.curPage))];
     MovieCardView.render(curPage);
     PaginationView.render(state.currentPage);

@@ -168,6 +168,12 @@ const viewModule = (function () {
     constructor() {
       this.parentEl = $(".pagination");
     }
+    hidePagination() {
+      this.parentEl.addClass("d-none");
+    }
+    showPagination() {
+      this.parentEl.removeClass("d-none");
+    }
     clearParentElement() {
       this.parentEl[0].innerHTML = "";
     }
