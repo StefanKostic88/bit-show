@@ -1,0 +1,14 @@
+.search-movie__list {
+  position: absolute;
+  top: 100%;
+  left: -2%;
+  /* display: none; */
+}
+
+.movie-pagination {
+  bottom: 40px;
+}
+
+.page-link {
+  cursor: pointer;
+}
