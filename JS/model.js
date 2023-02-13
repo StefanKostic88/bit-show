@@ -83,9 +83,8 @@ const modelModule = (function () {
       const res = await fetch(`http://api.tvmaze.com/shows?page=${curPage}`);
       const data = await res.json();
       if (!res.ok) throw new Error();
-      console.log(data);
+
       if (curPage === 0) {
-        console.log(data);
         return data
           .sort((a, b) => b.rating.average - a.rating.average)
           .slice(0, 50)
@@ -101,10 +100,6 @@ const modelModule = (function () {
   };
 
   const showMovienfo = async function (id) {
-    // https://api.tvmaze.com/seasons/1/episodes
-    // https://api.tvmaze.com/shows/1/cast
-    const urlAdress = `https://api.tvmaze.com/shows/${id}`;
-
     const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
     const seasonsRes = await fetch(
       `https://api.tvmaze.com/shows/${id}/seasons`
@@ -122,30 +117,23 @@ const modelModule = (function () {
     const crewData = await crewRes.json();
     const epizodesListData = await epizodezListRes.json();
 
-    const seasArrOb = seasonsData.map((el) => {
+    const mapedSeasonsArr = seasonsData.map((el) => {
       return { start: el.premiereDate, end: el.endDate };
     });
-    // console.log();
-    // const seasons = {
-    //   seasons: seasonsData.length,
-    //   seasonsList: [...seasArrOb],
-    // };
-    const castObj = castData.map((el) => {
+
+    const mapedCastArr = castData.map((el) => {
       return {
         actor: el.person.name,
         character: el.character.name,
       };
     });
-    console.log(akaData);
     const akaList = akaData.map((el) => {
       return {
         name: el.name,
         country: el.country ? el.country.name : "Unavailable",
       };
     });
-    console.log(akaList);
-
-    const crewD = crewData
+    const mapedCrewArr = crewData
       ? crewData.map((el) => {
           return {
             type: el.type,
@@ -153,28 +141,24 @@ const modelModule = (function () {
           };
         })
       : "No crew";
-    // // console.log(crewD);
-    const epizodesList = epizodesListData.map((el) => {
+    const mapedEpizodesListArr = epizodesListData.map((el) => {
       return {
         season: el.season,
         epizodeNum: el.number,
         name: el.name,
       };
     });
-    // // console.log(epizodesList);
 
-    return {
-      name: data.name,
-      img: data.image
-        ? data.image.original
-        : "https://static.tvmaze.com/uploads/images/medium_portrait/7/18392.jpg",
-      description: data.summary,
-      seasons: [...seasArrOb],
-      cast: [...castObj],
-      crewList: [...crewD],
-      aka: [...akaList],
-      epizodesListArr: [...epizodesList],
-    };
+    return generateMovieInfo(
+      data.name,
+      data.image,
+      data.summary,
+      [...mapedSeasonsArr],
+      [...mapedCastArr],
+      [...mapedCrewArr],
+      [...akaList],
+      [...mapedEpizodesListArr]
+    );
   };
 
   const getSearchMovieLIstData = async function (searchTerm = "") {
