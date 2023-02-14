@@ -2,7 +2,6 @@
   position: absolute;
   top: 100%;
   left: -2%;
-  /* display: none; */
 }
 
 .movie-pagination {
@@ -20,9 +19,3 @@
   top: 0;
   right: 16px;
 }
-
-/* @media (max-width: 300px) {
-  #main-nav {
-    margin-top: 50rem;
-  }
-} */

@@ -9,6 +9,21 @@
     showMovienfo,
   } = model;
 
+  const appInit = () => {
+    //Render Landing Page
+
+    initLandingPage();
+
+    // Event Listeners
+
+    $(".form-control").on("keyup", controlInputChange);
+    $(".pagination").on("click", controlPagination);
+    $(".logo").on("click", initLandingPage);
+    $(".form-control").on("mouseup", controlClearMovieList);
+  };
+
+  ////controlerHandlers
+
   const controlPagination = async function (e) {
     if (typeof e === "object") {
       if (!isFinite(+e.target.dataset.page)) return;
@@ -39,6 +54,14 @@
     $("#close-movie__info").on("click", controlCloseMovieInfo);
   };
 
+  const controlClearMovieList = function () {
+    setTimeout(() => {
+      if ($(this).val() === "") {
+        SerachMovieListView.clearParentContainer();
+      }
+    }, 200);
+  };
+
   const initLandingPage = async function () {
     try {
       const firstPage = [...(await getInitialData())];
@@ -60,9 +83,7 @@
     $(".search-movie__list-item").on("click", controlMovieInfo);
   };
 
-  $(".form-control").on("keyup", controlInputChange);
-  $(".pagination").on("click", controlPagination);
-  $(".logo").on("click", initLandingPage);
+  /// Initalization
 
-  initLandingPage();
+  appInit();
 })(modelModule, viewModule);

@@ -187,7 +187,7 @@ const viewModule = (function () {
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4"  href="#" data-page="${
     obj.prevPage
   }"
-    >Previous</a
+    >Prev</a
   >
   </li>
   <li class="page-item ${obj.secondPrevPage <= 95 ? "d-none" : ""}">
@@ -234,7 +234,7 @@ const viewModule = (function () {
     >Next</a
   >
   </li>
-  <li class="page-item ${obj.curPage > 0 ? "active" : ""} ">
+  <li class="page-item ${obj.curPage > 0 ? "active" : " d-none"} ">
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4"  href="#" data-page="${0}"
     >${obj.curPage > 0 ? top50 : ""}</a
   >

@@ -162,7 +162,6 @@ const modelModule = (function () {
   };
 
   const getSearchMovieLIstData = async function (searchTerm = "") {
-    console.log(searchTerm);
     const res = await fetch(
       `https://api.tvmaze.com/search/shows?q=${searchTerm}`
     );
