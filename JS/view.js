@@ -59,7 +59,7 @@ const viewModule = (function () {
       const { name, aka, img, seasons, cast, description, crew, episodes } =
         movieInfo;
 
-      const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center position-relative">
+      const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center position-relative mt-3 mt-md-5 mb-md-3 ">
       ${this.generateMovieTitle(name)} 
       <div class="row m-0 p-0 container-xl d-flex justify-content-center">
         ${this.generateImg(img)}
@@ -179,10 +179,11 @@ const viewModule = (function () {
       this.parentEl[0].innerHTML = "";
     }
     render(obj) {
+      const top50 = window.innerWidth <= 320 ? "Top 50" : "Back To Top 50";
       this.clearParentElement();
       const html = `<li class="page-item ${
         obj.prevPage === 0 ? "disabled" : ""
-      }">
+      } d-none d-sm-block">
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4"  href="#" data-page="${
     obj.prevPage
   }"
@@ -203,7 +204,7 @@ const viewModule = (function () {
     >${obj.prevPage}</a
   >
   </li>
-  <li class="page-item ${obj.curPage || obj.curPage === 0 ? "active" : ""} ">
+  <li class="page-item ${obj.curPage || obj.curPage === 0 ? "active" : ""}">
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4"  href="#" data-page="${
     obj.curPage
   }"
@@ -224,16 +225,18 @@ const viewModule = (function () {
     >${obj.secondNextPage}</a
   >
   </li>
-  <li class="page-item  ${obj.nextPage >= 100 ? "disabled" : ""}">
+  <li class="page-item  ${
+    obj.nextPage >= 100 ? "disabled" : ""
+  } d-none d-sm-block">
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4" href="#" data-page="${
     obj.nextPage >= 100 ? 100 : obj.nextPage
   }"
     >Next</a
   >
   </li>
-  <li class="page-item ${obj.curPage > 0 ? "active" : ""}">
+  <li class="page-item ${obj.curPage > 0 ? "active" : ""} ">
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4"  href="#" data-page="${0}"
-    >${obj.curPage > 0 ? "Back To Top 50" : ""}</a
+    >${obj.curPage > 0 ? top50 : ""}</a
   >
   </li>`;
 
