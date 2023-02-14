@@ -9,12 +9,19 @@ const viewModule = (function () {
     }
     render(arr) {
       this.clearParentContainer();
-      const generatedCard = arr
+
+      const generatedCards = `<h1 class="text-dark text-center">Popular Shows</h1>${arr
         .map((card) => {
           return this.generateMarkup(card);
         })
-        .join("");
-      this.parantEl[0].insertAdjacentHTML("beforeend", generatedCard);
+        .join("")}`;
+      // const generatedCard = arr
+      //   .map((card) => {
+      //     return this.generateMarkup(card);
+      //   })
+      //   .join("");
+
+      this.parantEl[0].insertAdjacentHTML("beforeend", generatedCards);
     }
 
     generateMarkup(card) {
@@ -54,11 +61,8 @@ const viewModule = (function () {
     constructor() {
       super();
     }
-    render(movieInfo) {
+    render({ name, aka, img, seasons, cast, description, crew, episodes }) {
       this.clearParentContainer();
-      const { name, aka, img, seasons, cast, description, crew, episodes } =
-        movieInfo;
-
       const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center position-relative mt-3 mt-md-5 mb-md-3 ">
       ${this.generateMovieTitle(name)} 
       <div class="row m-0 p-0 container-xl d-flex justify-content-center">

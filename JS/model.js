@@ -141,13 +141,15 @@ const modelModule = (function () {
           };
         })
       : "No crew";
-    const mapedEpizodesListArr = epizodesListData.map((el) => {
-      return {
-        season: el.season,
-        epizodeNum: el.number,
-        name: el.name,
-      };
-    });
+    const mapedEpizodesListArr = epizodesListData.map(
+      ({ season, number, name }) => {
+        return {
+          season: season,
+          epizodeNum: number,
+          name,
+        };
+      }
+    );
 
     return generateMovieInfo(
       data.name,
