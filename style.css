@@ -11,7 +11,8 @@
 
 .page-link,
 .card,
-.search-movie__list-item {
+.search-movie__list-item,
+.logo {
   cursor: pointer;
 }
 

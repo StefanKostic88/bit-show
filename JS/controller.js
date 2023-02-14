@@ -62,6 +62,7 @@
 
   $(".form-control").on("keyup", controlInputChange);
   $(".pagination").on("click", controlPagination);
+  $(".logo").on("click", initLandingPage);
 
   initLandingPage();
 })(modelModule, viewModule);
