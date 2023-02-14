@@ -72,6 +72,7 @@
   const controlMovieInfo = async function () {
     state.movieInfo = await showMovienfo(+this.id);
     MovieInfoView.render(state.movieInfo);
+    $(".movie-info").fadeOut(0).fadeIn(700);
     PaginationView.hidePagination();
     SerachMovieListView.clearParentContainer();
     $(".form-control").val("");
@@ -96,3 +97,5 @@
 
   appInit();
 })(modelModule, viewModule);
+
+// console.log("");
