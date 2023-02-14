@@ -46,7 +46,7 @@ const viewModule = (function () {
       this.parantEl[0].insertAdjacentHTML("beforeend", html);
     }
     generateMarkup(movieData) {
-      return `<li class="list-group-item" id="${movieData.id}">${movieData.name}</li>`;
+      return `<li class="list-group-item search-movie__list-item" id="${movieData.id}">${movieData.name}</li>`;
     }
   }
 
@@ -59,8 +59,8 @@ const viewModule = (function () {
       const { name, aka, img, seasons, cast, description, crew, episodes } =
         movieInfo;
 
-      const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center">
-      ${this.generateMovieTitle(name)}
+      const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center position-relative">
+      ${this.generateMovieTitle(name)} 
       <div class="row m-0 p-0 container-xl d-flex justify-content-center">
         ${this.generateImg(img)}
         <div class="col col-sm-5 col-md-5 col-lg-4 d-flex flex-column">
@@ -76,6 +76,7 @@ const viewModule = (function () {
          ${this.generateCrew(crew)}
         </div>
       </div>
+      <button type="button" class="btn btn-outline-dark position-absolute mt-3 mt-md-1 " id="close-movie__info">X</button>
     </div>`;
       this.parantEl[0].insertAdjacentHTML("beforeend", html);
     }
@@ -202,7 +203,7 @@ const viewModule = (function () {
     >${obj.prevPage}</a
   >
   </li>
-  <li class="page-item ${obj.curPage || obj.curPage === 0 ? "active" : ""}">
+  <li class="page-item ${obj.curPage || obj.curPage === 0 ? "active" : ""} ">
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4"  href="#" data-page="${
     obj.curPage
   }"

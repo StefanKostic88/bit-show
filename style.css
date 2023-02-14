@@ -9,6 +9,13 @@
   bottom: 40px;
 }
 
-.page-link {
+.page-link,
+.card,
+.search-movie__list-item {
   cursor: pointer;
+}
+
+#close-movie__info {
+  top: 0;
+  right: 16px;
 }
