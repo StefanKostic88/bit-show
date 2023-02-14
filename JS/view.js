@@ -15,12 +15,6 @@ const viewModule = (function () {
           return this.generateMarkup(card);
         })
         .join("")}`;
-      // const generatedCard = arr
-      //   .map((card) => {
-      //     return this.generateMarkup(card);
-      //   })
-      //   .join("");
-
       this.parantEl[0].insertAdjacentHTML("beforeend", generatedCards);
     }
 
