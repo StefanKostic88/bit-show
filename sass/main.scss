@@ -1,3 +1,14 @@
+$blue: #0d6efd;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.costum__font-size {
+  font-size: calc(1rem + 0.65vw);
+  @media (min-width: 1200px) {
+    font-size: 1.35rem;
+  }
+}
+
 .search-movie__list {
   position: absolute;
   top: 100%;

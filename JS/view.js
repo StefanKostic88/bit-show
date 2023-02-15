@@ -10,7 +10,7 @@ const viewModule = (function () {
     render(arr) {
       this.clearParentContainer();
 
-      const generatedCards = `<h1 class="text-dark text-center">Popular Shows</h1>${arr
+      const generatedCards = `<h2 class="text-dark text-center">Popular Shows</h2>${arr
         .map((card) => {
           return this.generateMarkup(card);
         })
@@ -27,7 +27,7 @@ const viewModule = (function () {
         alt="..."
       />
       <div class="card-body">
-        <h5 class="card-title text-center">${card.name}</h5>
+        <h5 class="card-title text-center text-primary fw-bolder">${card.name}</h5>
       </div>
       </div> `;
     }
@@ -57,7 +57,7 @@ const viewModule = (function () {
     }
     render({ name, aka, img, seasons, cast, description, crew, episodes }) {
       this.clearParentContainer();
-      const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center position-relative mt-3 mt-md-5 mb-md-3 ">
+      const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center position-relative mt-3 mt-md-5 mb-md-3 costum__font-size">
       ${this.generateMovieTitle(name)} 
       <div class="row m-0 p-0 container-xl d-flex justify-content-center">
         ${this.generateImg(img)}
@@ -80,9 +80,9 @@ const viewModule = (function () {
     }
 
     generateMovieTitle(titleData) {
-      return `<h2 class="text-center mb-4 mt-4 mt-md-2">
+      return `<h1 class="text-center mb-5 mt-3 mt-md-2">
       ${titleData}
-    </h2>`;
+    </h1>`;
     }
     generateImg(imgData) {
       return `<img
@@ -180,7 +180,7 @@ const viewModule = (function () {
       const top50 = window.innerWidth <= 320 ? "Top 50" : "Back To Top 50";
       this.clearParentElement();
       const html = `<li class="page-item ${
-        obj.prevPage === 0 ? "disabled" : ""
+        obj.prevPage <= 0 ? "disabled" : ""
       } d-none d-sm-block">
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4"  href="#" data-page="${
     obj.prevPage
