@@ -8216,7 +8216,7 @@ textarea.form-control-lg {
 }
 
 .fw-semibold {
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }
 
 .fw-bold {
@@ -11609,11 +11609,20 @@ textarea.form-control-lg {
   }
 }
 .costum__font-size {
-  font-size: calc(1rem + 0.65vw);
+  font-size: calc(1rem + 0.5vw);
 }
 @media (min-width: 1200px) {
   .costum__font-size {
     font-size: 1.35rem;
+  }
+}
+
+.costum-input__font-size {
+  font-size: calc(0.75rem + 0.5vw);
+}
+@media (min-width: 1200px) {
+  .costum-input__font-size {
+    font-size: 1.1rem;
   }
 }
 

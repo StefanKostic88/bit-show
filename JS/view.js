@@ -47,7 +47,7 @@ const viewModule = (function () {
       this.parantEl[0].insertAdjacentHTML("beforeend", html);
     }
     generateMarkup(movieData) {
-      return `<li class="list-group-item search-movie__list-item" id="${movieData.id}">${movieData.name}</li>`;
+      return `<li class="list-group-item search-movie__list-item fw-semibold" id="${movieData.id}">${movieData.name}</li>`;
     }
   }
 
