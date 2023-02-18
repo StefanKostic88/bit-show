@@ -1,25 +1,24 @@
-const viewModule = (function () {
-  class MovieCardView {
-    constructor() {
-      this.parantEl = $("#movie-container");
-    }
+class MovieCardView {
+  constructor() {
+    this.parantEl = $("#movie-container");
+  }
 
-    clearParentContainer() {
-      this.parantEl[0].innerHTML = "";
-    }
-    render(arr) {
-      this.clearParentContainer();
+  clearParentContainer() {
+    this.parantEl[0].innerHTML = "";
+  }
+  render(arr) {
+    this.clearParentContainer();
+    // text-dark
+    const generatedCards = `<h2 class="text-center">Popular Shows</h2>${arr
+      .map((card) => {
+        return this.generateMarkup(card);
+      })
+      .join("")}`;
+    this.parantEl[0].insertAdjacentHTML("beforeend", generatedCards);
+  }
 
-      const generatedCards = `<h2 class="text-dark text-center">Popular Shows</h2>${arr
-        .map((card) => {
-          return this.generateMarkup(card);
-        })
-        .join("")}`;
-      this.parantEl[0].insertAdjacentHTML("beforeend", generatedCards);
-    }
-
-    generateMarkup(card) {
-      return `
+  generateMarkup(card) {
+    return `
       <div class="card m-xl-4 m-3" style="width: 18rem" id="${card.id}">
       <img
         src=${card.img}
@@ -27,37 +26,38 @@ const viewModule = (function () {
         alt="..."
       />
       <div class="card-body">
-        <h5 class="card-title text-center text-primary fw-bolder">${card.name}</h5>
+        <h5 class="card-title text-center  fw-bolder">${card.name}</h5>
       </div>
       </div> `;
-    }
+  }
+}
+// text-primary
+
+class SerachMovieListView {
+  constructor() {
+    this.parantEl = $(".search-movie__list");
+  }
+  clearParentContainer() {
+    this.parantEl[0].innerHTML = "";
   }
 
-  class SerachMovieListView {
-    constructor() {
-      this.parantEl = $(".search-movie__list");
-    }
-    clearParentContainer() {
-      this.parantEl[0].innerHTML = "";
-    }
-
-    render(movieLIst) {
-      this.clearParentContainer();
-      const html = movieLIst.map((el) => this.generateMarkup(el)).join("");
-      this.parantEl[0].insertAdjacentHTML("beforeend", html);
-    }
-    generateMarkup(movieData) {
-      return `<li class="list-group-item search-movie__list-item fw-semibold" id="${movieData.id}">${movieData.name}</li>`;
-    }
+  render(movieLIst) {
+    this.clearParentContainer();
+    const html = movieLIst.map((el) => this.generateMarkup(el)).join("");
+    this.parantEl[0].insertAdjacentHTML("beforeend", html);
   }
+  generateMarkup(movieData) {
+    return `<li class="list-group-item search-movie__list-item fw-semibold" id="${movieData.id}">${movieData.name}</li>`;
+  }
+}
 
-  class MovieInfoView extends MovieCardView {
-    constructor() {
-      super();
-    }
-    render({ name, aka, img, seasons, cast, description, crew, episodes }) {
-      this.clearParentContainer();
-      const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center position-relative mt-3 mt-md-5 mb-md-3 costum__font-size">
+class MovieInfoView extends MovieCardView {
+  constructor() {
+    super();
+  }
+  render({ name, aka, img, seasons, cast, description, crew, episodes }) {
+    this.clearParentContainer();
+    const html = `<div class="movie-info m-0 p-0 d-flex flex-column align-items-center position-relative mt-3 mt-md-5 mb-md-3 costum__font-size">
       ${this.generateMovieTitle(name)} 
       <div class="row m-0 p-0 container-xl d-flex justify-content-center">
         ${this.generateImg(img)}
@@ -74,25 +74,26 @@ const viewModule = (function () {
          ${this.generateCrew(crew)}
         </div>
       </div>
-      <button type="button" class="btn btn-outline-dark position-absolute mt-3 mt-md-1 " id="close-movie__info">X</button>
+      <button type="button" class="btn  position-absolute mt-3 mt-md-1 " id="close-movie__info">X</button>
     </div>`;
-      this.parantEl[0].insertAdjacentHTML("beforeend", html);
-    }
+    this.parantEl[0].insertAdjacentHTML("beforeend", html);
+  }
+  // btn-outline-dark
 
-    generateMovieTitle(titleData) {
-      return `<h1 class="text-center mb-5 mt-3 mt-md-2">
+  generateMovieTitle(titleData) {
+    return `<h1 class="text-center mb-5 mt-3 mt-md-2">
       ${titleData}
     </h1>`;
-    }
-    generateImg(imgData) {
-      return `<img
+  }
+  generateImg(imgData) {
+    return `<img
       class="img-fluid col col-sm-7 col-md-5 col-lg-4 p-0 h-50"
       src=${imgData}
       alt=""
     />`;
-    }
-    generateAka(akaDate) {
-      return `<div class="pt-3 pb-3 col-md-10 col-lg-8">
+  }
+  generateAka(akaDate) {
+    return `<div class="pt-3 pb-3 col-md-10 col-lg-8">
       <h3>AKA</h3>
       <ul class="d-flex flex-wrap align-items-center list-unstyled">
         ${akaDate
@@ -102,9 +103,9 @@ const viewModule = (function () {
           .join("")}
         </ul>
         </div>`;
-    }
-    generateSeasons(seasonsData) {
-      return `<h3>Seasons(${seasonsData.length})</h3>
+  }
+  generateSeasons(seasonsData) {
+    return `<h3>Seasons(${seasonsData.length})</h3>
         <ul class="ps-md-5">
        ${seasonsData
          .map((el) => {
@@ -112,9 +113,9 @@ const viewModule = (function () {
          })
          .join("")}
         </ul>`;
-    }
-    generateCast(castData) {
-      return `<h3>Cast</h3>
+  }
+  generateCast(castData) {
+    return `<h3>Cast</h3>
           <ul class="ps-md-5">
            ${castData
              .map((el) => {
@@ -122,9 +123,9 @@ const viewModule = (function () {
              })
              .join("")}
           </ul>`;
-    }
-    generateCrew(crewData) {
-      return ` <div class="ms-md-5">
+  }
+  generateCrew(crewData) {
+    return ` <div class="ms-md-5">
         <h3>Crew</h3>
         <ul>
           ${crewData
@@ -134,15 +135,15 @@ const viewModule = (function () {
             .join("")}
         </ul>
         </div>`;
-    }
-    generateDescription(descriptionData) {
-      return ` <div class="pt-3 pb-3 mt-3 col-md-10 col-lg-8">
+  }
+  generateDescription(descriptionData) {
+    return ` <div class="pt-3 pb-3 mt-3 col-md-10 col-lg-8">
       <h4>Show Details</h4>
       ${descriptionData}
     </div>`;
-    }
-    generateEpisodes(eoisodesData) {
-      return ` <div class="me-md-5">
+  }
+  generateEpisodes(eoisodesData) {
+    return ` <div class="me-md-5">
       <h3>Epizodes List</h3>
       <ul>
        ${eoisodesData
@@ -154,34 +155,34 @@ const viewModule = (function () {
          .join("")}
       </ul>
       </div>`;
-    }
-    doubleDigits(num) {
-      return num.toLocaleString("en-US", {
-        minimumIntegerDigits: 2,
-        useGrouping: false,
-      });
-    }
   }
+  doubleDigits(num) {
+    return num.toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+  }
+}
 
-  class PaginationView {
-    constructor() {
-      this.parentEl = $(".pagination");
-    }
-    hidePagination() {
-      this.parentEl.addClass("d-none");
-    }
-    showPagination() {
-      this.parentEl.removeClass("d-none");
-    }
-    clearParentElement() {
-      this.parentEl[0].innerHTML = "";
-    }
-    render(obj) {
-      const top50 = window.innerWidth <= 320 ? "Top 50" : "Back To Top 50";
-      this.clearParentElement();
-      const html = `<li class="page-item ${
-        obj.prevPage <= 0 ? "disabled" : ""
-      } d-none d-sm-block">
+class PaginationView {
+  constructor() {
+    this.parentEl = $(".pagination");
+  }
+  hidePagination() {
+    this.parentEl.addClass("d-none");
+  }
+  showPagination() {
+    this.parentEl.removeClass("d-none");
+  }
+  clearParentElement() {
+    this.parentEl[0].innerHTML = "";
+  }
+  render(obj) {
+    const top50 = window.innerWidth <= 320 ? "Top 50" : "Back To Top 50";
+    this.clearParentElement();
+    const html = `<li class="page-item ${
+      obj.prevPage <= 0 ? "disabled" : ""
+    } d-none d-sm-block">
   <a class="page-link ps-sm-3 pe-sm-3 ps-md-4 pe-md-4"  href="#" data-page="${
     obj.prevPage
   }"
@@ -238,14 +239,10 @@ const viewModule = (function () {
   >
   </li>`;
 
-      this.parentEl[0].insertAdjacentHTML("beforeend", html);
-    }
+    this.parentEl[0].insertAdjacentHTML("beforeend", html);
   }
-
-  return {
-    MovieCardView: new MovieCardView(),
-    SerachMovieListView: new SerachMovieListView(),
-    MovieInfoView: new MovieInfoView(),
-    PaginationView: new PaginationView(),
-  };
-})();
+}
+export const movieCardView = new MovieCardView();
+export const serachMovieListView = new SerachMovieListView();
+export const movieInfoView = new MovieInfoView();
+export const paginationView = new PaginationView();

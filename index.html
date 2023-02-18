@@ -13,12 +13,15 @@
     <link rel="stylesheet" href="./css/main.css" />
     <title>Document</title>
   </head>
-  <body>
+  <body class="dark-theme">
     <nav class="navbar bg-body-tertiary fixed-top pt-0 pb-0" id="main-nav">
+      <!-- bg-dark -->
       <div
-        class="container-xl bg-dark d-flex justify-content-around align-items-center"
+        id="main-nav"
+        class="container-xl d-flex justify-content-around align-items-center"
       >
-        <h5 class="text-light logo">BitShow</h5>
+        <!-- text-light -->
+        <h5 class="logo">BitShow</h5>
         <form class="d-flex position-relative" role="search">
           <input
             class="form-control me-2 costum-input__font-size"
@@ -29,6 +32,21 @@
           <ul
             class="list-group w-100 search-movie__list costum-input__font-size"
           ></ul>
+          <div
+            class="form-check form-switch position-absolute dark-mode__toggler"
+          >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckChecked"
+              name="light-mode"
+              checked
+            />
+            <!-- <label class="form-check-label" for="flexSwitchCheckChecked"
+              >Checked switch checkbox input</label
+            > -->
+          </div>
         </form>
       </div>
     </nav>
@@ -36,6 +54,7 @@
       class="container-fluid d-flex justify-content-center align-items-center ps-0 pe-0"
     >
       <!-- bg-secondary -->
+      <!-- bg-light -->
       <div
         id="movie-container"
         class="row container-xl d-flex justify-content-center align-items-center pt-4 pt-md-2 pb-5 mt-5 mb-5 ps-0 pe-0"
@@ -46,9 +65,10 @@
         class="pagination fixed-bottom movie-pagination d-flex justify-content-center align-items-center bg-dark container-xl pt-2"
       ></ul>
     </nav>
-
+    <!-- text-light -->
     <footer
-      class="container-xl bg-dark text-light p-3 d-flex justify-content-center align-items-center fixed-bottom"
+      id="main-footer"
+      class="container-xl p-3 d-flex justify-content-center align-items-center fixed-bottom"
     >
       Copyright @ Stefan Kostic 2023
     </footer>
@@ -58,8 +78,8 @@
       integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
       crossorigin="anonymous"
     ></script>
-    <script src="/js/model.js"></script>
-    <script src="/js/view.js"></script>
-    <script src="/js/controller.js"></script>
+    <!-- <script src="/js/model.js"></script>
+    <script src="/js/view.js"></script> -->
+    <script type="module" src="/js/controller.js"></script>
   </body>
 </html>
