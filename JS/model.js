@@ -99,46 +99,40 @@ export const getInitialData = async function (curPage = 0) {
 };
 //Movie Info
 export const showMovienfo = async function (id) {
-  const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
-  const seasonsRes = await fetch(`https://api.tvmaze.com/shows/${id}/seasons`);
-  const castRes = await fetch(`https://api.tvmaze.com/shows/${id}/cast`);
-  const akaRes = await fetch(`https://api.tvmaze.com/shows/${id}/akas`);
-  const crewRes = await fetch(`https://api.tvmaze.com/shows/${id}/crew`);
-  const epizodezListRes = await fetch(
-    `https://api.tvmaze.com/shows/${id}/episodes`
+  const res = await fetch(
+    `https://api.tvmaze.com/shows/${id}?embed[]=seasons&embed[]=cast&embed[]=crew&embed[]=akas&embed[]=episodes`
   );
-  const data = await res.json();
-  const seasonsData = await seasonsRes.json();
-  const castData = await castRes.json();
-  const akaData = await akaRes.json();
-  const crewData = await crewRes.json();
-  const epizodesListData = await epizodezListRes.json();
 
-  const mapedSeasonsArr = seasonsData.map((el) => {
+  const data = await res.json();
+
+  const mapedSeasonsArr = data._embedded.seasons.map((el) => {
     return { start: el.premiereDate, end: el.endDate };
   });
 
-  const mapedCastArr = castData.map((el) => {
+  const mapedCastArr = data._embedded.cast.map((el) => {
     return {
       actor: el.person.name,
       character: el.character.name,
     };
   });
-  const akaList = akaData.map((el) => {
+
+  const akaList = data._embedded.akas.map((el) => {
     return {
       name: el.name,
       country: el.country ? el.country.name : "Unavailable",
     };
   });
-  const mapedCrewArr = crewData
-    ? crewData.map((el) => {
+
+  const mapedCrewArr = data._embedded.crew
+    ? data._embedded.crew.map((el) => {
         return {
           type: el.type,
           name: el.person.name,
         };
       })
     : "No crew";
-  const mapedEpizodesListArr = epizodesListData.map(
+
+  const mapedEpizodesListArr = data._embedded.episodes.map(
     ({ season, number, name }) => {
       return {
         season: season,
